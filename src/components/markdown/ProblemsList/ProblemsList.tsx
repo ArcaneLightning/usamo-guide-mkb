@@ -48,19 +48,22 @@ type AnnotatedProblemsListProps =
       modules?: boolean; // only if is division table
     };
 export function ProblemsList(unannotatedProps: ProblemsListProps): JSX.Element {
-  const markdownProblems = useMarkdownProblemLists()!;
+  const markdownProblems = useMarkdownProblemLists() ?? [];
   let problems: ProblemInfo[] | DivisionProblemInfo[];
   if (typeof unannotatedProps.problems === 'string') {
-    problems = markdownProblems.find(
-      list => list.listId === unannotatedProps.problems
-    )!.problems;
-    if (!problems) {
-      throw new Error(
-        "Couldn't find the problem list with name " + unannotatedProps.problems
+    const list = markdownProblems.find(
+      l => l.listId === unannotatedProps.problems
+    );
+    // Avoid crashing during SSG/client render if a module is missing a
+    // corresponding `.problems.json` (or the MDX references a non-existent listId).
+    if (!list) {
+      console.warn(
+        `[ProblemsList] Couldn't find the problem list '${unannotatedProps.problems}'. Rendering empty list.`
       );
     }
+    problems = (list?.problems ?? []) as ProblemInfo[];
   } else {
-    problems = unannotatedProps.problems as DivisionProblemInfo[];
+    problems = (unannotatedProps.problems ?? []) as DivisionProblemInfo[];
   }
   const props: AnnotatedProblemsListProps = {
     ...unannotatedProps,

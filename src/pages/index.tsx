@@ -373,8 +373,6 @@ export default function IndexPage({ path }): JSX.Element {
 
           <hr className="my-16 border-gray-300 md:my-20 2xl:my-24 dark:border-gray-800" />
         </div>
-
-        <div className="h-16 md:h-20 xl:h-36 2xl:h-48"></div>
       </div>
 
       {/* Begin FAQ */}

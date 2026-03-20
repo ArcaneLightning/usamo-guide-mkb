@@ -44,8 +44,14 @@ export const SidebarNav = () => {
   const links: NavLinkGroup[] = React.useMemo(() => {
     return MODULE_ORDERING[activeSection].map((category: Chapter) => ({
       label: category.name,
-      children: category.items.map(
-        moduleID => sidebarLinks.find(link => link.id === moduleID)! // lol O(n^2)?
+      // Avoid ever producing `undefined` children at runtime (SSG would crash).
+      children: category.items.reduce<MarkdownLayoutSidebarModuleLinkInfo[]>(
+        (acc, moduleID) => {
+          const link = sidebarLinks.find(x => x.id === moduleID);
+          if (link) acc.push(link);
+          return acc;
+        },
+        []
       ),
     }));
   }, [activeSection, sidebarLinks]);
@@ -67,8 +73,7 @@ export const SidebarNav = () => {
             key={group.label}
             label={group.label}
             isActive={
-              group.children.findIndex(x => x.id === markdownLayoutInfo.id) !==
-              -1
+              group.children.some(x => x?.id === markdownLayoutInfo?.id)
             }
           >
             {group.children.map(link => (
