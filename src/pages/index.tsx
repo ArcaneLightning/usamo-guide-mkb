@@ -93,7 +93,9 @@ export default function IndexPage({ path }): JSX.Element {
 
       {/* Begin Hero */}
       <div className="relative overflow-hidden -mt-16 pt-32 bg-gray-50 dark:bg-gradient-to-b dark:from-black dark:via-black dark:to-[#1a0d00] transition-colors duration-500">
+        <div className="pointer-events-none absolute inset-0 bg-[url('/images/math-doodles.png')] bg-repeat bg-center dark:opacity-17" />
         <div className="pointer-events-none absolute inset-0 z-0">
+          
           <div className="absolute inset-0 z-0 [mask-image:radial-gradient(ellipse_at_center,white_20%,transparent_75%)]">
             <svg
               className="h-full w-full opacity-[0.15] dark:opacity-[0.4]"
@@ -334,18 +336,15 @@ export default function IndexPage({ path }): JSX.Element {
 
       <ActiveCardsHome/>
 
-      <div className="bg-gray-100 dark:bg-black">
-        <div className="h-16 md:h-20 xl:h-36 2xl:h-48"></div>
-
-        <div className={containerClasses}>
-          <div className="dark:hidden">
-            <h1 className={classNames(headerClasses)}>Join our Team.</h1>
-          </div>
-          <div className="invisible h-0 dark:visible dark:h-auto">
-            <GlowingText
-              className={classNames(headerClassesNoText, 'text-white')}
-              extraGlow
-            >
+      <div className="relative bg-gray-100 dark:bg-black">
+        <div className="relative z-10">
+          <div className="h-15 md:h-20"></div>
+          <div className={containerClasses}>
+            <div className="invisible h-0 dark:visible dark:h-auto">
+              <GlowingText
+                className={classNames(headerClassesNoText, 'text-white')}
+                extraGlow
+              >
               Join our Team.
             </GlowingText>
           </div>
@@ -370,19 +369,20 @@ export default function IndexPage({ path }): JSX.Element {
               </a>
             </GlowingRing>
           </div>
-
-          <hr className="my-16 border-gray-300 md:my-20 2xl:my-24 dark:border-gray-800" />
+          <div className="h-15 md:h-20"></div>
         </div>
+      </div>
       </div>
 
       {/* Begin FAQ */}
-      <div className="dark:bg-dark-surface bg-white">
-        <div className="mx-auto max-w-(--breakpoint-xl) px-4 pt-12 pb-16 sm:px-6 sm:pt-16 sm:pb-20 lg:px-8 lg:pt-20 lg:pb-28">
-          <h2 className={classNames(headerClasses, 'dark:text-gray-100')}>
+      <div className="relative dark:bg-dark-surface bg-white">
+        <div className="pointer-events-none absolute inset-0 bg-[url('/images/math-doodles.png')] bg-repeat bg-center dark:opacity-12" />
+        <div className="relative z-10 mx-auto max-w-(--breakpoint-xl) px-4 pt-12 pb-16 sm:px-6 sm:pt-16 sm:pb-20 lg:px-8 lg:pt-20 lg:pb-28">
+          <h2 className={classNames(headerClasses, 'dark:text-gray-100 text-center')}>
             Frequently asked questions
           </h2>
           <div className="pt-10 md:pt-16">
-            <dl className="md:grid md:grid-cols-2 md:gap-8">
+            <dl className="mx-auto grid max-w-6xl gap-10 text-center md:grid-cols-2 md:gap-8">
               <div>
                 <div>
                   <dt className="text-lg leading-6 font-medium text-gray-900 dark:text-gray-100">
@@ -524,7 +524,7 @@ export default function IndexPage({ path }): JSX.Element {
       </div>
       {/*End FAQ*/}
 
-      <div className="bg-gray-100 dark:bg-gray-900">
+      <div className="dark:bg-[#0D0D0D]">
         <div className="mx-auto max-w-(--breakpoint-xl) px-4 py-12">
           <p className="dark:text-dark-med-emphasis text-center text-base leading-6 text-gray-400">
             &copy; {new Date().getFullYear()} USAMO Guide.
